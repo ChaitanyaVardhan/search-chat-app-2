@@ -1,0 +1,32 @@
+{
+  "name": "search-chat-app-2",
+  "version": "1.0.0",
+  "description": "node.js app that allows chat and search",
+  "main": "web.js",
+  "scripts": {
+    "test": "node web.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChaitanyaVardhan/search-chat-app-2"
+  },
+  "keywords": [
+    "search",
+    "chat"
+  ],
+  "author": "Chaitanya Vardhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChaitanyaVardhan/search-chat-app-2/issues"
+  },
+  "homepage": "https://github.com/ChaitanyaVardhan/search-chat-app-2",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "express-session": "^1.15.0",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^1.7.2",
+    "underscore": "^1.8.3"
+  }
+}
