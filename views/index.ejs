@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Search and Chat</title>
+	<style>
+		.error {
+			color: red;
+		}
+		.success {
+			color: green;
+		}
+	</style>
+</head>
+<body>
+	<h1>Login</h1>
+	<%- message %>
+	Try accessing <a href="/restricted">/restricted</a>, then authenticate with "tj" and "foobar".
+	<form method="post" action="/login">
+	  <p>
+	    <label>Username:</label>
+	    <input type="text" name="username" required>
+	  </p>
+	  <p>
+	    <label>Password:</label>
+	    <input type="password" name="password" required>
+	  </p>
+	  <p>
+	    <input type="submit" value="Login">
+	  </p>
+	</form>
+</body>
+</html>
