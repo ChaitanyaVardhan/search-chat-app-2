@@ -68,7 +68,7 @@ var searchfn = function(req, res){
 }
 
 var mongolab_api_url = function(query){
-	var obj = {"company": query};
+	var obj = {$and:[{"raisedAmt":{"$gte":query.min_amt}},{"raisedAmt":{"$lte":query.max_amt}}]};
 	var url = 'https://api.mlab.com/api/1/databases/search-chat-db/collections/prod?q=' 
 				+ JSON.stringify(obj) 
 				+ '&apiKey=' + process.env.MONGO_API_KEY;
@@ -76,7 +76,12 @@ var mongolab_api_url = function(query){
 }
 
 var search_result = function(req, res){
-	var query = req.body.query;
+	var min_amt = parseInt(req.body.min_amt);
+	var max_amt = parseInt(req.body.max_amt);
+	query = {
+		"min_amt": min_amt,
+		"max_amt": max_amt
+	};
 	request.get(mongolab_api_url(query), function(err, resp, body){
 		if(err){
 			req.session.error = err;

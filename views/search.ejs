@@ -11,13 +11,23 @@
 <p><a href="/logout">Logout</a></p>
 <form method="post" action="/searchresult">
 	<p>
-		<label>Search:</label>
-		<input type="text" name="query">	
+		<label>Enter Min Amt:</label>
+		<input type="text" name="min_amt" required>	
+	</p>
+	<p>
+		<label>Enter Max Amt:</label>
+		<input type="text" name="max_amt" required>	
 	</p>
 	<p>
 		<input type="submit" value="Search">
 	</p>
 </form>
+<!--
+<% if (data.length == 0) { %>
+<p>Sorry No Search Results!!!</p>
+<% } %>
+-->
+<% if (data.length > 0) { %>
 <table class="table table-striped">
 	<thead>
 		<th>Name</th>
@@ -46,5 +56,6 @@
 <% } %>
 	</tbody>
 </table>
+<% } %>
 </body>
 </html>
