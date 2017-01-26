@@ -71,7 +71,7 @@ var mongolab_api_url = function(query){
 	var obj = {"company": query};
 	var url = 'https://api.mlab.com/api/1/databases/search-chat-db/collections/prod?q=' 
 				+ JSON.stringify(obj) 
-				+ '&apiKey=8pn5gMO0RkADdtTjua72NyZlubj2GY0w';
+				+ '&apiKey=' process.env.MONGO_API_KEY;
 	console.log(url);
 	return url;
 }
