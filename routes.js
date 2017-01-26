@@ -1,10 +1,24 @@
 var uu				= require('underscore');
 var hash			= require('./pass').hash;
+var request			= require('request');
 
 var users = {
-	tj: { name: 'tj'}
+	user2: { name: 'user2'},
+	chaitanya: {name: 'chaitanya'}
 }
 
+
+hash('foobar', function(err, salt, hash){
+	if (err) throw err;
+	users.user2.salt = salt;
+	users.user2.hash = hash;
+});
+
+hash('develop', function(err, salt, hash){
+	if (err) throw err;
+	users.chaitanya.salt = salt;
+	users.chaitanya.hash = hash;
+});
 
 var indexfn = function(req, res) {
 	res.render("index");
@@ -13,12 +27,6 @@ var indexfn = function(req, res) {
 var homefn = function(req, res) {
 	res.render("home");
 }
-
-hash('foobar', function(err, salt, hash){
-	if (err) throw err;
-	users.tj.salt = salt;
-	users.tj.hash = hash;
-});
 
 var authenticate = function(name, pass, fn) {
 	var user = users[name];
@@ -41,9 +49,11 @@ var loginfn = function(req, res) {
 				res.redirect('/home');
 			});
 		} else {
-			req.session.error = 'Authentication failed, please check your '
+			req.session.error = err 
+				+ ' Authentication failed, please check your '
 				+ ' username and password.'
-				+ ' (use "tj" and "foobar")';
+				+ ' (use "tj" and "foobar")'
+				+ ' or (use "chaitanya" and "develop")';
 			res.redirect('/');
 		}
 	})
@@ -51,6 +61,34 @@ var loginfn = function(req, res) {
 
 var chatfn = function(req, res){
 	res.sendFile(__dirname + '/views/index.html')
+}
+
+var searchfn = function(req, res){
+	res.render("search",{data: ''});
+}
+
+var mongolab_api_url = function(query){
+	var obj = {"company": query};
+	var url = 'https://api.mlab.com/api/1/databases/search-chat-db/collections/prod?q=' 
+				+ JSON.stringify(obj) 
+				+ '&apiKey=8pn5gMO0RkADdtTjua72NyZlubj2GY0w';
+	console.log(url);
+	return url;
+}
+
+var search_result = function(req, res){
+	var query = req.body.query;
+	request.get(mongolab_api_url(query), function(err, resp, body){
+		console.log(body)
+		if(err){
+			req.session.error = err;
+			res.render("search");
+			return;
+		}
+		search_results = JSON.parse(body);
+		res.render("search", {data: search_results}); 
+	})
+
 }
 
 var logout = function(req, res) {
@@ -84,11 +122,13 @@ var ROUTES = define_routes({
 	'/logout': logout,
 	'/home': [restrict, homefn],
 	'/chat': [restrict, chatfn],
+	'/search': [restrict, searchfn],
 	'/restricted': [restrict, restricted]
 })
 
 var postROUTES = define_routes({
 	'/login': loginfn,
+	'/searchresult': [restrict, search_result],
 })
 
 module.exports = {

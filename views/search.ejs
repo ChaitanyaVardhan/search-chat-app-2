@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Search and Chat :: Search Results</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<p><a href="/logout">Logout</a></p>
+<form method="post" action="/searchresult">
+	<p>
+		<label>Search:</label>
+		<input type="text" name="query">	
+	</p>
+	<p>
+		<input type="submit" value="Search">
+	</p>
+</form>
+<table class="table table-striped">
+	<thead>
+		<th>Name</th>
+		<th>Employees</th>
+		<th>Category</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Date of Funding</th>
+		<th> Amount Raised</th>
+		<th>Currency</th>
+		<th>Round</th>
+	</thead>
+	<tbody>
+<% for(var i = 0; i < data.length; i++) { %>
+		<tr>
+		<td><%= data[i].company %></td>
+		<td><%= data[i].numEmps %></td>
+		<td><%= data[i].category %></td>
+		<td><%= data[i].city %></td>
+		<td><%= data[i].state %></td>
+		<td><%= data[i].fundedDate %></td>
+		<td><%= data[i].raisedAmt %></td>
+		<td><%= data[i].raisedCurrency %></td>
+		<td><%= data[i].round %></td>
+		</tr>
+<% } %>
+	</tbody>
+</table>
+</body>
+</html>
