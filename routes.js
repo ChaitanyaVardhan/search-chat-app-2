@@ -72,14 +72,12 @@ var mongolab_api_url = function(query){
 	var url = 'https://api.mlab.com/api/1/databases/search-chat-db/collections/prod?q=' 
 				+ JSON.stringify(obj) 
 				+ '&apiKey=' + process.env.MONGO_API_KEY;
-	console.log(url);
 	return url;
 }
 
 var search_result = function(req, res){
 	var query = req.body.query;
 	request.get(mongolab_api_url(query), function(err, resp, body){
-		console.log(body)
 		if(err){
 			req.session.error = err;
 			res.render("search");
