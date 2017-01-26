@@ -1,0 +1,12 @@
+.heading {
+	text-align: center;
+}
+
+.msg , .error, .success {
+	text-align: center;
+}
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}

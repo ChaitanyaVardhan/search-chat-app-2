@@ -44,8 +44,7 @@ var loginfn = function(req, res) {
 			req.session.regenerate(function() {
 				req.session.user = user;
 				req.session.success = 'Authenticated as ' + user.name
-										+ ' click to <a href="/logout">Logout</a>. '
-										+ ' You may now access <a href="/restricted">Restricted</a>. ';
+										+ ' click to <a href="/logout">Logout</a>. ';
 				res.redirect('/home');
 			});
 		} else {

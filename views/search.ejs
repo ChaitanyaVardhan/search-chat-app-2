@@ -4,24 +4,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/custom.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p><a href="/logout">Logout</a></p>
-<form method="post" action="/searchresult">
-	<p>
-		<label>Enter Min Amt:</label>
-		<input type="text" name="min_amt" required>	
-	</p>
-	<p>
-		<label>Enter Max Amt:</label>
-		<input type="text" name="max_amt" required>	
-	</p>
-	<p>
-		<input type="submit" value="Search">
-	</p>
+<div class="container-fluid">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/home">Search Chat App</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/home">Home</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/chat">Chat</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<form class="form-inline" method="post" action="/searchresult">
+  <div class="form-group">
+    <label class="sr-only" for="min_amt">Email address</label>
+    <input type="text" class="form-control" name="min_amt" placeholder="Min Amount" required>
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="max_amt">Password</label>
+    <input type="text" class="form-control" name="max_amt" placeholder="Max Amount" required>
+  </div>
+  <button type="submit" class="btn btn-success">Search</button>
 </form>
+
 <!--
 <% if (data.length == 0) { %>
 <p>Sorry No Search Results!!!</p>
@@ -57,5 +80,6 @@
 	</tbody>
 </table>
 <% } %>
+</div>
 </body>
 </html>
